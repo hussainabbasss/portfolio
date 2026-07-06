@@ -1,0 +1,13 @@
+# Netlify build config for the portfolio.
+# The Next.js runtime (@netlify/plugin-nextjs) is auto-installed, so
+# build command and publish dir are detected — we only override the
+# secrets scanner below.
+
+[build.environment]
+  # These two are NEXT_PUBLIC_* on purpose: they're compiled into the
+  # client bundle so the browser can talk to Supabase. The URL is
+  # public, and the publishable/anon key only grants the read-only
+  # `anon` role — every write is blocked by row-level security unless
+  # a user is signed in. So they are NOT secrets; tell the scanner to
+  # ignore them instead of failing the build.
+  SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY"
